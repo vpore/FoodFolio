@@ -10,7 +10,7 @@ import { createItem } from '../../actions/item';
 
 import styles from './Form.module.css';
 
-const Form = () => {
+const Form = ({setNewItem}) => {
   
   const user = JSON.parse(localStorage.getItem('profile'));
   const [itemData, setItemData] = useState({ itemName:'', quantity:'', expiryDate:'', category:'' });
@@ -20,6 +20,7 @@ const Form = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     createItem({...itemData, name: user.data.result.name});
+    setNewItem(itemData.itemName);
     clear();
   }
 

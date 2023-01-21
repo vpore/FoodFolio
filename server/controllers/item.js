@@ -15,7 +15,7 @@ export const createItem = async (req, res) => {
 
 export const getItems = async (req, res) => {
     try{
-        const items = await Item.find();
+        const items = await Item.find({creator: req.userId});
         res.status(200).json(items);
     }
     catch(err){

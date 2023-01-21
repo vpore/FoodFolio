@@ -27,7 +27,6 @@ const App = () => {
                 <Route path='/signin' exact element={<SignIn globalLogin={globalLogin}/>} />
                 <Route path='/signup' exact element={<SignUp globalLogin={globalLogin}/>} />
                 <Route path='/home' exact element={<Home />} />
-                {/* <Route path='/inventory' exact element={<Inventory />} /> */}
             </Routes>
         </>
     );

@@ -4,14 +4,13 @@ import { getItems } from "../../actions/item";
 import styles from './List.module.css';
 
 
-const List = () => {
+const List = ({newItem}) => {
 
     const [items, setItems] = useState([]);
     
     useEffect(() => {
         getItems().then(data => setItems(data));
-    }, []);
-
+    }, [newItem]);
     return(
         <>
             <React.Fragment>
