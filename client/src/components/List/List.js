@@ -15,21 +15,12 @@ const List = ({newItem}) => {
 
     let allItems = {};
     for(let eachItem of items) {
-        if(allItems[eachItem.category]) {
+            allItems[eachItem.category] ? "" : allItems[eachItem.category] = new Array();
             allItems[eachItem.category].push({
                 "itemName": eachItem.itemName,
                 "quantity": eachItem.quantity,
-                "expiryDate": eachItem.expiryDate
+                "expiryDate": eachItem.expiryDate.replace(/T.*/,'').split('-').reverse().join('-')
             });
-        }
-        else {
-            allItems[eachItem.category] = new Array();
-            allItems[eachItem.category].push({
-                "itemName": eachItem.itemName,
-                "quantity": eachItem.quantity,
-                "expiryDate": eachItem.expiryDate
-            });
-        }
     } //dairy: milk,cheese,butter  fruits:apples,oranges
     
     return(

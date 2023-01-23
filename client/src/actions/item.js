@@ -14,3 +14,11 @@ export const getItems = async () => {
     }
     catch(err){console.log(err);}
 }
+
+export const getExpItems = async () => {
+    try{
+        const {data} = await api.fetchExpItems();
+        return data;
+    }
+    catch(err){console.log(err);}
+}

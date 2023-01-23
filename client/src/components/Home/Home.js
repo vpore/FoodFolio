@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import ExpiryTable from "../ExpiryTable/ExpiryTable";
 import Inventory from "../Inventory/Inventory";
@@ -6,14 +6,17 @@ import Inventory from "../Inventory/Inventory";
 import styles from './Home.module.css';
 
 const Home = () => {
+
+    const [newItem, setNewItem] = useState("");
+
     return(
         <>
             <div className={styles.main}>
                 <div className={styles.expirytable}>
-                    <ExpiryTable />
+                    <ExpiryTable newItem={newItem} />
                 </div>
                 <div className={styles.inventory}>
-                    <Inventory />
+                    <Inventory newItem={newItem} setNewItem={setNewItem} />
                 </div>
 
             </div>

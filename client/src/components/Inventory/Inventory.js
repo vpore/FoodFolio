@@ -5,8 +5,7 @@ import Form from "../Form/Form";
 
 import styles from './Inventory.module.css';
 
-const Inventory = () => {
-    const [newItem, setNewItem] = useState("");
+const Inventory = ({ newItem, setNewItem }) => {
 
     return(
         <>

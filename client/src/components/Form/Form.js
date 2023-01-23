@@ -19,19 +19,22 @@ const Form = ({setNewItem}) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    createItem({...itemData, name: user.data.result.name});
-    setNewItem(itemData.itemName);
-    clear();
+    if(itemData.category === "") alert("Please choose the category");
+    else {
+      createItem({...itemData, name: user.data.result.name});
+      setNewItem(itemData.itemName);
+      clear();
+    }
   }
 
   const clear = () => {
-    setItemData({ itemName:'', quantity:'', expiryDate:'', category:'' });
+    setItemData({ itemName:'', quantity:'', expiryDate:Date.now(), category:'' });
   }
 
   return (
     <React.Fragment>
-      <Paper elevation={3} style={{ backgroundColor: "#f3faff" }}>
-        <form className={styles.main} onSubmit={handleSubmit}>
+      <Paper className={styles.main} elevation={3} style={{ backgroundColor: "#f3faff" }}>
+        <form onSubmit={handleSubmit}>
           <Typography
             variant="h6"
             gutterBottom
@@ -78,6 +81,9 @@ const Form = ({setNewItem}) => {
                 fullWidth
                 type="date"
                 value={itemData.expiryDate}
+                inputProps={{
+                  min: new Date().toISOString().slice(0, 10)
+                }}
                 InputLabelProps={{
                   shrink: true,
                 }}

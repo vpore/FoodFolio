@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import Item from "../models/item.js";
 
 export const createItem = async (req, res) => {
@@ -19,6 +18,29 @@ export const getItems = async (req, res) => {
         res.status(200).json(items);
     }
     catch(err){
+        res.status(404).json({message: err.message});
+    }
+}
+
+export const checkExpiration = async (req, res) => {
+    try {
+        const expItems = await Item.aggregate([
+            {$match: {
+                creator: req.userId, 
+                $expr: {
+                  $lte: [
+                    { $dateDiff: { startDate: new Date(), endDate: "$expiryDate", unit: "day" } },
+                    7
+                  ]
+                }
+            }},
+            {$sort: {expiryDate: 1}}
+        ]).exec();
+        
+        res.status(200).json(expItems);
+    }
+    catch(err){
+        console.log(err);
         res.status(404).json({message: err.message});
     }
 }

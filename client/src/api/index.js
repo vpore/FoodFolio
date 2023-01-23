@@ -13,3 +13,4 @@ export const signIn = (formData) => API.post('/user/signin', formData);
 export const signUp = (formData) => API.post('/user/signup', formData);
 export const createItem = (newItem) => API.post('/item', newItem);
 export const fetchItems = () => API.get('/item');
+export const fetchExpItems = () => API.get('/item/checkexp');
