@@ -22,3 +22,10 @@ export const getExpItems = async () => {
     }
     catch(err){console.log(err);}
 }
+
+export const deleteItem = async (id) => {
+    try{
+        await api.deleteItem(id);
+    }
+    catch(err){console.log(err);}
+}

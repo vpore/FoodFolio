@@ -67,6 +67,9 @@ const Form = ({setNewItem}) => {
                 fullWidth
                 type="number"
                 value={itemData.quantity}
+                inputProps={{
+                  min: 1
+                }}
                 onChange={(e) =>
                   setItemData({ ...itemData, quantity: e.target.value })
                 }

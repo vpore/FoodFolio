@@ -4,3 +4,11 @@
     justify-content: center;
     margin-top: 30px;
 }
+
+.nothingText {
+    text-align: center;
+}
+
+.delBtn {
+    cursor: pointer;
+}

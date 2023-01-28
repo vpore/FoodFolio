@@ -6,16 +6,24 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Tooltip from '@mui/material/Tooltip';
+import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 
 import styles from './ExpiryTable.module.css';
-import { getExpItems } from '../../actions/item';
+import { deleteItem, getExpItems } from '../../actions/item';
+import { Button, TextField } from '@mui/material';
 
-const ExpiryTable = ({ newItem }) => {
+const ExpiryTable = ({ newItem, delItem, setDelItem }) => {
 
     const [expItems, setExpItems] = useState([]);
+
     useEffect(() => {
         getExpItems().then(data => setExpItems(data));
     }, [newItem]);
+
+    useEffect(() => {
+        setExpItems(expItems.filter(eachItem => eachItem._id !== delItem));
+    }, [delItem]);
 
     const daysRem = (d) => {
         const t = new Date().toISOString();
@@ -30,14 +38,18 @@ const ExpiryTable = ({ newItem }) => {
         eachItem.expIn = daysRem(eachItem.expiryDate);
     });
 
-    console.log(expItems);
-
+    const [clicked, setClicked] = useState(false);
 
     return(
         <>
             <React.Fragment>
                 <h1>Expiry Table</h1>
                 <hr/>
+                {!expItems.length ?
+                <div>
+                    <br/><p className={styles.nothingText}>No items are expiring recently... #winning</p>
+                </div> :
+
                 <div className={styles.main}>
                     <TableContainer component={Paper} elevation={3} style={{ backgroundColor: "#f3faff", width: "fit-content" }}>
                         <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -47,6 +59,7 @@ const ExpiryTable = ({ newItem }) => {
                                     <TableCell>Quantity</TableCell>
                                     <TableCell>Expiry Date</TableCell>
                                     <TableCell>Expiring In</TableCell>
+                                    <TableCell></TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -61,12 +74,14 @@ const ExpiryTable = ({ newItem }) => {
                                     <TableCell>{row.quantity}</TableCell>
                                     <TableCell>{row.expiryDate.substring(0, 10).replace(/T.*/,'').split('-').reverse().join('-')}</TableCell>
                                     <TableCell>{row.expIn<=0?"Expired":`${row.expIn} day(s)`}</TableCell>
+                                    <TableCell> <Tooltip title='Wanna delete?' placement="right"><RemoveCircleOutlineIcon className={styles.delBtn} fontSize='small' onClick={() => {deleteItem(row._id); setDelItem(row._id)}}/></Tooltip> </TableCell>
                                 </TableRow>
                             ))}
                             </TableBody>
                         </Table>
                     </TableContainer>
                 </div>
+                }
             </React.Fragment>
         </>
     );

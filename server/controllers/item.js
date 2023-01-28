@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import Item from "../models/item.js";
 
 export const createItem = async (req, res) => {
@@ -14,12 +15,20 @@ export const createItem = async (req, res) => {
 
 export const getItems = async (req, res) => {
     try{
-        const items = await Item.find({creator: req.userId});
+        const items = await Item.aggregate([{$match: {creator: req.userId}}, {$sort: {expiryDate: 1}}]);
         res.status(200).json(items);
     }
     catch(err){
+        console.log(err);
         res.status(404).json({message: err.message});
     }
+}
+
+export const deleteItem = async (req, res) => {
+    const {id} = req.params;
+    if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send("No item with that id");
+    await Item.findByIdAndRemove(id);
+    res.json({message: 'Item Deleted!'});
 }
 
 export const checkExpiration = async (req, res) => {

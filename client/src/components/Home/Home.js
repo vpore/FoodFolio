@@ -8,15 +8,16 @@ import styles from './Home.module.css';
 const Home = () => {
 
     const [newItem, setNewItem] = useState("");
+    const [delItem, setDelItem] = useState("");
 
     return(
         <>
             <div className={styles.main}>
                 <div className={styles.expirytable}>
-                    <ExpiryTable newItem={newItem} />
+                    <ExpiryTable newItem={newItem} delItem={delItem} setDelItem={setDelItem} />
                 </div>
                 <div className={styles.inventory}>
-                    <Inventory newItem={newItem} setNewItem={setNewItem} />
+                    <Inventory newItem={newItem} setNewItem={setNewItem} delItem={delItem} setDelItem={setDelItem} />
                 </div>
 
             </div>
