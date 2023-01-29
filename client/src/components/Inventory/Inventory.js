@@ -5,7 +5,7 @@ import Form from "../Form/Form";
 
 import styles from './Inventory.module.css';
 
-const Inventory = ({ newItem, setNewItem, delItem, setDelItem }) => {
+const Inventory = ({ newItem, setNewItem, updatedItem, setUpdatedItem, delItem, setDelItem }) => {
 
     return(
         <>
@@ -13,7 +13,7 @@ const Inventory = ({ newItem, setNewItem, delItem, setDelItem }) => {
                 <h1>Inventory</h1>
                 <hr/>
                 <div className={styles.main}>
-                    <List newItem={newItem} delItem={delItem} setDelItem={setDelItem} />
+                    <List newItem={newItem} updatedItem={updatedItem} setUpdatedItem={setUpdatedItem} delItem={delItem} setDelItem={setDelItem} />
                     <Form setNewItem={setNewItem}/>
                 </div>
             </React.Fragment>

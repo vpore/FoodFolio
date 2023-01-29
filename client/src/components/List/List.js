@@ -1,27 +1,27 @@
-import { Paper } from "@mui/material";
+import { Paper, TextField, Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Tooltip from '@mui/material/Tooltip';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 
-import { getItems, deleteItem } from "../../actions/item";
+import { getItems, updateItem, deleteItem } from "../../actions/item";
 
 import styles from './List.module.css';
 import nothing from '../../assets/nothing.svg';
 
 
-const List = ({ newItem, delItem, setDelItem }) => {
+const List = ({ newItem, updatedItem, setUpdatedItem, delItem, setDelItem }) => {
 
     const [selCategory, setSelCategory] = useState("all");
     const [items, setItems] = useState([]);
     const user = JSON.parse(localStorage.getItem('profile'));
+
+    const [clicked, setClicked] = useState(false);
+    const [itemClicked, setItemClicked] = useState("");
+    const [changedQuantity, setChangedQuantity] = useState("");
     
     useEffect(() => {
         getItems().then(data => setItems(data));
-    }, [newItem]);
-
-    useEffect(() => {
-        setItems(items.filter(eachItem => eachItem._id !== delItem));
-    }, [delItem]);
+    }, [newItem, delItem, updatedItem]);
 
     let allItems = {};
     for(let eachItem of items) {
@@ -66,12 +66,31 @@ const List = ({ newItem, delItem, setDelItem }) => {
                                             return(
                                                 <Paper className={styles.itemList} variant="outlined" key={eachItem.itemName}>
                                                     <p>{eachItem.itemName}</p>
-                                                    <p>{eachItem.quantity}</p>
+                                                    {clicked ?
+                                                        itemClicked===eachItem._id ?
+                                                        <React.Fragment>
+                                                            <TextField 
+                                                                label="Update Quantity"
+                                                                value={changedQuantity}
+                                                                type="number"
+                                                                inputProps={{
+                                                                    min: 1
+                                                                }}
+                                                                onChange={(e) =>
+                                                                    setChangedQuantity(e.target.value)
+                                                                }
+                                                            />
+                                                            <Button onClick={() => {setClicked(!clicked); updateItem(eachItem._id, changedQuantity); setUpdatedItem({id: eachItem._id})}}>OK</Button>
+                                                        </React.Fragment> :
+                                                        <p className={styles.pointer} onClick={() => {setChangedQuantity(eachItem.quantity); setClicked(!clicked); setItemClicked(eachItem._id)}}>{eachItem.quantity}</p>
+                                                        :
+                                                        <p className={styles.pointer} onClick={() => {setChangedQuantity(eachItem.quantity); setClicked(!clicked); setItemClicked(eachItem._id)}}>{eachItem.quantity}</p>
+                                                    }
                                                     <p>{eachItem.expiryDate.replace(/T.*/,'').split('-').reverse().join('-')}</p>
-                                                    <Tooltip title='Wanna delete?' placement="right"><RemoveCircleOutlineIcon className={styles.delBtn} fontSize="small" onClick={() => {deleteItem(eachItem._id); setDelItem(eachItem._id)}}/></Tooltip>
+                                                    <Tooltip title='Wanna delete?' placement="right"><RemoveCircleOutlineIcon className={styles.pointer} fontSize="small" onClick={() => {deleteItem(eachItem._id); setDelItem(eachItem._id)}}/></Tooltip>
                                                 </Paper>
                                             )
-                                        })                                                
+                                        })
                                     ) :
                                     Object.keys(allItems).map(key => {
                                         return(
@@ -79,9 +98,28 @@ const List = ({ newItem, delItem, setDelItem }) => {
                                             allItems[key].map(eachItem =>
                                                 <Paper className={styles.itemList} variant="outlined" key={eachItem.itemName}>
                                                     <p>{eachItem.itemName}</p>
-                                                    <p>{eachItem.quantity}</p>
+                                                    {clicked ?
+                                                        itemClicked===eachItem._id ?
+                                                        <React.Fragment>
+                                                            <TextField 
+                                                                label="Update Quantity"
+                                                                value={changedQuantity}
+                                                                type="number"
+                                                                inputProps={{
+                                                                    min: 1
+                                                                }}
+                                                                onChange={(e) =>
+                                                                    setChangedQuantity(e.target.value)
+                                                                }
+                                                            />
+                                                            <Button onClick={() => {setClicked(!clicked); updateItem(eachItem._id, changedQuantity); setUpdatedItem({id: eachItem._id})}}>OK</Button>
+                                                        </React.Fragment> :
+                                                        <p className={styles.pointer} onClick={() => {setChangedQuantity(eachItem.quantity); setClicked(!clicked); setItemClicked(eachItem._id)}}>{eachItem.quantity}</p>
+                                                        :
+                                                        <p className={styles.pointer} onClick={() => {setChangedQuantity(eachItem.quantity); setClicked(!clicked); setItemClicked(eachItem._id)}}>{eachItem.quantity}</p>
+                                                    }
                                                     <p>{eachItem.expiryDate}</p>
-                                                    <Tooltip title='Wanna delete?' placement="right"><RemoveCircleOutlineIcon className={styles.delBtn} fontSize="small" onClick={() => {deleteItem(eachItem._id); setDelItem(eachItem._id)}}/></Tooltip>
+                                                    <Tooltip title='Wanna delete?' placement="right"><RemoveCircleOutlineIcon className={styles.pointer} fontSize="small" onClick={() => {deleteItem(eachItem._id); setDelItem(eachItem._id)}}/></Tooltip>
                                                 </Paper>
                                             )
                                         )

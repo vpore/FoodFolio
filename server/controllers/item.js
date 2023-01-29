@@ -24,8 +24,18 @@ export const getItems = async (req, res) => {
     }
 }
 
+export const updateItem = async (req, res) => {
+    const {id} = req.params;
+    const newQuantity = Object.keys(req.body)[0];
+    
+    if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send("No item with that id");
+    const updatedItem = await Item.findByIdAndUpdate(id, {$set: {quantity: newQuantity}}, {new: true});
+    res.json(updatedItem);
+}
+
 export const deleteItem = async (req, res) => {
     const {id} = req.params;
+
     if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send("No item with that id");
     await Item.findByIdAndRemove(id);
     res.json({message: 'Item Deleted!'});

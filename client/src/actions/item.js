@@ -15,6 +15,13 @@ export const getItems = async () => {
     catch(err){console.log(err);}
 }
 
+export const updateItem = async (id, updatedItem) => {
+    try {
+        const {data} = await api.updateItem(id, updatedItem);
+    }
+    catch(err){console.log(err);}
+}
+
 export const getExpItems = async () => {
     try{
         const {data} = await api.fetchExpItems();
