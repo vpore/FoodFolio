@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 
-import List from "../List/List";
+import Items from "../Items/Items";
 import Form from "../Form/Form";
 
 import styles from './Inventory.module.css';
@@ -13,7 +13,7 @@ const Inventory = ({ newItem, setNewItem, updatedItem, setUpdatedItem, delItem, 
                 <h1>Inventory</h1>
                 <hr/>
                 <div className={styles.main}>
-                    <List newItem={newItem} updatedItem={updatedItem} setUpdatedItem={setUpdatedItem} delItem={delItem} setDelItem={setDelItem} />
+                    <Items newItem={newItem} updatedItem={updatedItem} setUpdatedItem={setUpdatedItem} delItem={delItem} setDelItem={setDelItem} />
                     <Form setNewItem={setNewItem}/>
                 </div>
             </React.Fragment>

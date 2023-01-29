@@ -1,0 +1,12 @@
+
+.category{
+    display: flex;
+    flex-direction: column;
+}
+
+.categoryList {
+    display: flex;
+    padding: 10px;
+    margin-top: 5px;
+    cursor: pointer;
+}

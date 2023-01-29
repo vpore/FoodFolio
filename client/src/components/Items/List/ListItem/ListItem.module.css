@@ -1,0 +1,12 @@
+
+.itemList {
+    display: flex;
+    padding: 10px;
+    margin-top: 5px;
+    justify-content: space-around;
+    width: 550px;
+}
+
+.pointer {
+    cursor: pointer;
+}
