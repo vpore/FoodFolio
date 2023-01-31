@@ -1,17 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import Tooltip from '@mui/material/Tooltip';
-import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 
 import styles from './ExpiryTable.module.css';
-import { deleteItem, getExpItems, updateItem } from '../../actions/item';
-import { Button, TextField } from '@mui/material';
+
+import { getExpItems } from '../../actions/item';
+
+import TableItem from './TableItem/TableItem';
 
 const ExpiryTable = ({ newItem, updatedItem, setUpdatedItem, delItem, setDelItem }) => {
 
@@ -33,10 +27,6 @@ const ExpiryTable = ({ newItem, updatedItem, setUpdatedItem, delItem, setDelItem
     expItems.forEach(eachItem => {
         eachItem.expIn = daysRem(eachItem.expiryDate);
     });
-
-    const [clicked, setClicked] = useState(false);
-    const [itemClicked, setItemClicked] = useState("");
-    const [changedQuantity, setChangedQuantity] = useState("");
 
     return(
         <>
@@ -62,50 +52,7 @@ const ExpiryTable = ({ newItem, updatedItem, setUpdatedItem, delItem, setDelItem
                             </TableHead>
                             <TableBody>
                             {expItems.map((row) => (
-                                <TableRow
-                                key={row._id}
-                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                >
-                                    <TableCell style={{color: row.expIn<=0?"#8b0000":row.expIn<=3?"red":"#ffa700"}}>
-                                        {row.itemName}
-                                    </TableCell>
-                                    <TableCell>
-                                    {clicked ?
-                                        itemClicked===row._id ?
-                                        <React.Fragment>
-                                            <TextField 
-                                                label="Update Quantity"
-                                                value={changedQuantity}
-                                                type="number"
-                                                inputProps={{
-                                                    min: 1
-                                                }}
-                                                onChange={(e) =>
-                                                    setChangedQuantity(e.target.value)
-                                                }
-                                            />
-                                            <Button onClick={() => {setClicked(!clicked); updateItem(row._id, changedQuantity); setUpdatedItem({id: row._id})}}>OK</Button>
-                                        </React.Fragment> :
-                                        <p className={styles.pointer} onClick={() => {setChangedQuantity(row.quantity); setClicked(!clicked); setItemClicked(row._id)}}>{row.quantity}</p>
-                                        :
-                                        <p className={styles.pointer} onClick={() => {setChangedQuantity(row.quantity); setClicked(!clicked); setItemClicked(row._id)}}>{row.quantity}</p>
-                                    }    
-                                    </TableCell>
-                                    <TableCell>{row.expiryDate.substring(0, 10).replace(/T.*/,'').split('-').reverse().join('-')}</TableCell>
-                                    <TableCell>{row.expIn<=0?"Expired":`${row.expIn} day(s)`}</TableCell>
-                                    <TableCell>
-                                        <Tooltip
-                                            title='Wanna delete?'
-                                            placement="right"
-                                        >
-                                            <RemoveCircleOutlineIcon
-                                                className={styles.pointer}
-                                                fontSize='small'
-                                                onClick={() => {deleteItem(row._id); setDelItem(row._id)}}
-                                            />
-                                        </Tooltip>
-                                    </TableCell>
-                                </TableRow>
+                                <TableItem  key={row._id} row={row} setUpdatedItem={setUpdatedItem} setDelItem={setDelItem} />
                             ))}
                             </TableBody>
                         </Table>

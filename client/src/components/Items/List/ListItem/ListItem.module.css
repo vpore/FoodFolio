@@ -1,12 +1,18 @@
 
-.itemList {
+.main {
     display: flex;
     padding: 10px;
     margin-top: 5px;
     justify-content: space-around;
+    align-items: center;
     width: 550px;
+    height: 75px;
 }
 
 .pointer {
     cursor: pointer;
+}
+
+.text {
+    width: 120px;
 }
