@@ -1,10 +1,5 @@
 import React, {useState} from 'react';
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import Chip from '@mui/material/Chip';
+import { Grid, Paper, Typography, TextField, Button, Chip } from '@mui/material';
 
 import { createItem } from '../../actions/item';
 
@@ -34,6 +29,7 @@ const Form = ({setNewItem}) => {
   return (
     <React.Fragment>
       <Paper className={styles.main} elevation={3} style={{ backgroundColor: "#f3faff" }}>
+
         <form onSubmit={handleSubmit}>
           <Typography
             variant="h6"
@@ -58,6 +54,7 @@ const Form = ({setNewItem}) => {
                 }
               />
             </Grid>
+
             <Grid item xs={12}>
               <TextField
                 required
@@ -75,6 +72,7 @@ const Form = ({setNewItem}) => {
                 }
               />
             </Grid>
+
             <Grid item xs={12}>
             <TextField
                 required
@@ -95,6 +93,7 @@ const Form = ({setNewItem}) => {
                 }
               />
             </Grid>
+
             <Grid item xs={12}>
               <label style={{"color": "#616466"}}>Choose Category</label><br/>
               {
@@ -109,6 +108,7 @@ const Form = ({setNewItem}) => {
                 )
               }
             </Grid>
+
             <Grid item xs={12}>
               <Button type="submit" fullWidth variant="contained">
                 Add Foood
@@ -116,6 +116,7 @@ const Form = ({setNewItem}) => {
             </Grid>
           </Grid>
         </form>
+        
       </Paper>
     </React.Fragment>
   );

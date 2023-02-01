@@ -16,13 +16,25 @@ const List = ({ items, allItems, selCategory, setUpdatedItem, setDelItem }) => {
                         selCategory === "all" ?
                         (
                             items.map(eachItem => { return(
-                                <ListItem key={eachItem._id} eachItem={eachItem} setUpdatedItem={setUpdatedItem} setDelItem={setDelItem} allCategory={true} />
+                                <ListItem
+                                    key={eachItem._id}
+                                    eachItem={eachItem}
+                                    setUpdatedItem={setUpdatedItem}
+                                    setDelItem={setDelItem}
+                                    allCategory={true}
+                                />
                             )})
                         ) :
                         Object.keys(allItems).map(key => { return(
                             key === selCategory &&
                             allItems[key].map(eachItem =>
-                                <ListItem key={eachItem._id}  eachItem={eachItem} setUpdatedItem={setUpdatedItem} setDelItem={setDelItem} allCategory={false}/>
+                                <ListItem
+                                    key={eachItem._id} 
+                                    eachItem={eachItem}
+                                    setUpdatedItem={setUpdatedItem}
+                                    setDelItem={setDelItem}
+                                    allCategory={false}
+                                />
                             )
                         )})
                     }

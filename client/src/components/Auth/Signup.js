@@ -24,7 +24,12 @@ export default function SignUp({ globalLogin }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const formData = {firstName: data.get('firstName'), lastName: data.get('lastName'), email: data.get('email'), password: data.get('password')};
+    const formData = {
+      firstName: data.get("firstName"),
+      lastName: data.get("lastName"),
+      email: data.get("email"),
+      password: data.get("password"),
+    };
     signup(formData, navigate, loginG);
   };
 

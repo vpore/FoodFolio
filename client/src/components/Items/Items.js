@@ -41,9 +41,19 @@ const Items = ({ newItem, updatedItem, setUpdatedItem, delItem, setDelItem }) =>
                 </div>                
                 :
                 <div className={styles.main}>
-                    <Category allItems={allItems} selCategory={selCategory} setSelCategory={setSelCategory} />
+                    <Category
+                        allItems={allItems}
+                        selCategory={selCategory}
+                        setSelCategory={setSelCategory}
+                    />
 
-                    <List items={items} allItems={allItems} selCategory={selCategory} setUpdatedItem={setUpdatedItem} setDelItem={setDelItem} />
+                    <List
+                        items={items}
+                        allItems={allItems}
+                        selCategory={selCategory}
+                        setUpdatedItem={setUpdatedItem}
+                        setDelItem={setDelItem}
+                    />
                 </div>
                 
                 }

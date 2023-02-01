@@ -11,10 +11,26 @@ const Category = ({ allItems, selCategory, setSelCategory }) => {
             <div className={styles.category}>
                 <h2>Category</h2>
                     <div>
-                        <Paper className={styles.categoryList} variant="outlined" onClick={() => setSelCategory("all")}  sx={{"backgroundColor": selCategory==='all'?"lightBlue":""}}>All</Paper>
+                        <Paper
+                            className={styles.categoryList}
+                            variant="outlined"
+                            onClick={() => setSelCategory("all")} 
+                            sx={{"backgroundColor": selCategory==='all'?"lightBlue":""}}
+                        >
+                            All
+                        </Paper>
+
                         {
                             Object.keys(allItems).map(key =>
-                                <Paper className={styles.categoryList} variant="outlined" key={key} onClick={() => setSelCategory(key)} sx={{"backgroundColor": selCategory===key?"lightBlue":""}}>{key}</Paper>
+                                <Paper
+                                    className={styles.categoryList}
+                                    variant="outlined"
+                                    key={key}
+                                    onClick={() => setSelCategory(key)}
+                                    sx={{"backgroundColor": selCategory===key?"lightBlue":""}}
+                                >
+                                    {key}
+                                </Paper>
                             )
                         }
                     </div>

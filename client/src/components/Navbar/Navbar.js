@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import './Navbar.css';
+import styles from './Navbar.module.css';
 import logo from '../../assets/logo-2.png';
 
 const LandingPageLinks = () => (
@@ -30,11 +30,11 @@ const Navbar = ({ user, globalLogout }) => {
 	}
 	
 	return (
-		<div className="landing-navbar">
-			<div className="landing-navbar-logo">
-				<img src={logo} alt="aankh-logo" />
+		<div className={styles.landingNavbar}>
+			<div className={styles.landingNavbarLogo}>
+				<img src={logo} alt="kitchen-logo" />
 			</div>
-			<div className="landing-navbar-links">
+			<div className={styles.landingNavbarLinks}>
 				{user ? (
 					<React.Fragment>
 						<p>
