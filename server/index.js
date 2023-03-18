@@ -6,9 +6,12 @@ import dotenv from 'dotenv';
 
 import userRoutes from './routes/user.js';
 import itemRoutes from './routes/item.js';
+import checkExpirations from "./helpers/checkExpirations.js";
 
 const app = express();
 dotenv.config();
+
+const oneDayTime = 24 * 60 * 60 * 1000;
 
 app.use(bodyParser.json({limit: "30mb", extended: true}));
 app.use(bodyParser.urlencoded({limit: "30mb", extended: true}));
@@ -16,6 +19,16 @@ app.use(cors());
 
 app.use('/user', userRoutes);
 app.use('/item', itemRoutes);
+
+const checkExpirationsDaily = async () => {
+    setTimeout(async () => {
+        await checkExpirations();
+        await checkExpirationsDaily();
+    }, oneDayTime);
+};
+
+checkExpirations();
+checkExpirationsDaily();
 
 const PORT = process.env.PORT;
 

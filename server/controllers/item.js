@@ -1,11 +1,17 @@
 import mongoose from "mongoose";
 import Item from "../models/item.js";
+import generateNotification from "../helpers/generateNotification.js";
 
 export const createItem = async (req, res) => {
     const item = req.body;
     const newItem = new Item({...item, creator: req.userId, createdAt: new Date().toISOString()});
     try{
         await newItem.save();
+        await generateNotification(
+            newItem.expiryDate,
+            newItem.creator,
+            newItem._id
+        );
         res.status(201).json(newItem);
     }
     catch(err){
@@ -41,7 +47,7 @@ export const deleteItem = async (req, res) => {
     res.json({message: 'Item Deleted!'});
 }
 
-export const checkExpiration = async (req, res) => {
+export const getExpItems = async (req, res) => {
     try {
         const expItems = await Item.aggregate([
             {$match: {
