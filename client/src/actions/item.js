@@ -9,7 +9,7 @@ export const createItem = async (item) => {
 
 export const getItems = async () => {
     try{
-        const {data} = await api.fetchItems();
+        const {data} = await api.getItems();
         return data;
     }
     catch(err){console.log(err);}
@@ -24,7 +24,7 @@ export const updateItem = async (id, updatedItem) => {
 
 export const getExpItems = async () => {
     try{
-        const {data} = await api.fetchExpItems();
+        const {data} = await api.getExpItems();
         return data;
     }
     catch(err){console.log(err);}

@@ -12,7 +12,7 @@ API.interceptors.request.use((req) => {
 export const signIn = (formData) => API.post('/user/signin', formData);
 export const signUp = (formData) => API.post('/user/signup', formData);
 export const createItem = (newItem) => API.post('/item', newItem);
-export const fetchItems = () => API.get('/item');
+export const getItems = () => API.get('/item');
 export const updateItem = (id, updatedItem) => API.patch(`/item/${id}`, updatedItem);
 export const deleteItem = (id) => API.delete(`/item/${id}`);
-export const fetchExpItems = () => API.get('/item/checkexp');
+export const getExpItems = () => API.get('/item/checkexp');
