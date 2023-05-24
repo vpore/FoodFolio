@@ -7,6 +7,7 @@ import SignUp from "./components/Auth/Signup";
 import SignIn from "./components/Auth/Signin";
 import LandingPage from "./components/LandingPage/LandingPage";
 import Home from "./components/Home/Home";
+import Recipes from "./components/Recipes/Recipes";
 
 const App = () => {
     
@@ -18,7 +19,7 @@ const App = () => {
 		localStorage.removeItem('profile');
         navigate('/');
     }
-
+    
     return(
         <>
             <Navbar user={user} globalLogout={globalLogout}/>
@@ -27,6 +28,7 @@ const App = () => {
                 <Route path='/signin' exact element={<SignIn globalLogin={globalLogin}/>} />
                 <Route path='/signup' exact element={<SignUp globalLogin={globalLogin}/>} />
                 <Route path='/home' exact element={<Home />} />
+                <Route path='/recipes' exact element={<Recipes />} />
             </Routes>
         </>
     );
