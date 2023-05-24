@@ -38,40 +38,67 @@ export default async (notifications) => {
   // ];
 
   let notifs = {};
-  notifications.map(async notif => {
+  for (const notifi in notifications){
+    let notif = notifications[notifi];
     if(!notifs[notif.creator]) notifs[notif.creator] = new Array();
 
     const item = await Item.findById(notif.itemId);
     if(item) {
       notifs[notif.creator].push({
-        creator: notif.creator,
         itemName: item.itemName,
         expiryDate: item.expiryDate
       });
     }
-  });
-  console.log(notifs);
+  }
 
-  notifs.map(async notif => {
-    let items = [];
-    notif.map(n => {
-      items.push(n.itemName);
-    })
+  
 
-    const user = await User.findById(notif); // key of notif
-    if(user) {
+  for (const eachNotif in notifs) {
+    let items = "", item, date;
+    
+    for (const notif in notifs[eachNotif]) {
+      item = notifs[eachNotif][notif];
+      date = String(item.expiryDate).substr(0, 15);
+      items += `<p>${item.itemName} - ${date}</p>`;
+    }
+    
+    const user = await User.findById(eachNotif); // key of notif
+    if (user) {
       const html = `
       <p>Hi, ${user.name}</p>
-      <p>${items} is expiring on some-date</p>
+      <p>These are the recently expiring items.. Make sure to not waste them :)</p>
+      ${items}
       `;
       const sent = await transporter.sendMail({
         from: "focus.app123@gmail.com",
         to: user.email,
         subject: "Expiration Alert",
-        html
+        html,
       });
     }
-  })
+  }
+
+  // notifs.map(async notif => {
+  //   let items = "";
+  //   notif.map(eachNotif => {
+  //     items += `${eachNotif.itemName} - ${eachNotif.expiryDate}\n`;
+  //   })
+
+  //   const user = await User.findById(notif); // key of notif
+  //   if(user) {
+  //     const html = `
+  //     <p>Hi, ${user.name}</p>
+  //     <p>These are the recently expiring items.. Make sure to not waste them :)</p>
+  //     <p>${items}</p>
+  //     `;
+  //     const sent = await transporter.sendMail({
+  //       from: "focus.app123@gmail.com",
+  //       to: user.email,
+  //       subject: "Expiration Alert",
+  //       html
+  //     });
+  //   }
+  // })
 
 //   const user = await User.findById(notifications.creator);
 //   const item = await Item.findById(notifications.itemId);
