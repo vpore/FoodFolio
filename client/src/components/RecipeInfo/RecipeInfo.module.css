@@ -1,0 +1,37 @@
+
+.main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.cardContent {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.cardContentItem {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.recipe {
+    margin-top: 50px;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.ingredients, .instructions {
+    margin: 20px 0px 20px 0px;
+    align-self: flex-start;
+}
+
+.ingredients li, .instructions li {
+    margin-bottom: 5px;
+}
