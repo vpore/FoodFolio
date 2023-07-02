@@ -1,0 +1,25 @@
+
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.landingContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.heading {
+    font-weight: 600;
+    font-size: 3.6rem;
+}
+
+.description {
+    margin-top: 20px;
+    font-size: 1.4rem;
+}
