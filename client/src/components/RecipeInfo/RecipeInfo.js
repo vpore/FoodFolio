@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 
 import { getRecipeInfo } from "../../actions/recipe";
 import { Card, CardContent, CardMedia, Typography } from "@mui/material";
-import { obj } from "../../dk";
+// import { obj } from "../../dk";
 
 import AccessTimeRoundedIcon from "@mui/icons-material/AccessTimeRounded";
 import PeopleOutlineRoundedIcon from "@mui/icons-material/PeopleOutlineRounded";
