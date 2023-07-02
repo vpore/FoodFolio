@@ -8,13 +8,13 @@ import logo from '../../assets/logo-2.png';
 const LandingPageLinks = () => (
   <>
     <p>
-      <a href="/">Product</a>
+      <a>Product</a>
     </p>
     <p>
-      <a href="/">Pricing</a>
+      <a>Pricing</a>
     </p>
     <p>
-      <a href="/">Contact Us</a>
+      <a>Contact Us</a>
     </p>
     <p>
       <NavLink
@@ -82,13 +82,13 @@ const Navbar = ({ user, globalLogout }) => {
               </NavLink>
             </p>
             <p>
-              <a href="/">Community</a>
+              <a>Community</a>
             </p>
             <p>
-              <a href="/">Pricing</a>
+              <a>Pricing</a>
             </p>
             <p>
-              <a href="/">Contact Us</a>
+              <a>Contact Us</a>
             </p>
             <p onClick={globalLogout}>
               <a>Logout</a>
