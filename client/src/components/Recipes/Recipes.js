@@ -8,7 +8,7 @@ import { Masonry } from "@mui/lab";
 
 import Recipe from "./Recipe/Recipe";
 
-import { obj } from "../../dk";
+// import { obj } from "../../dk";
 import SearchBar from "../SearchBar/SearchBar";
 
 
