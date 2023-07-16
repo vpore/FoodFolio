@@ -45,7 +45,7 @@ export default function SignUp({ globalLogin }) {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "primary.main" }}>
+          <Avatar sx={{ m: 1, bgcolor: "green" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -106,10 +106,11 @@ export default function SignUp({ globalLogin }) {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              color="success"
             >
               Sign Up
             </Button>
-            <Grid container justifyContent="flex-end">
+            <Grid container>
               <Grid item>
                 <Link to='/signin'>
                   Already have an account? Sign in

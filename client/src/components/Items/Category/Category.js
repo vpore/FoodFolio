@@ -15,7 +15,7 @@ const Category = ({ allItems, selCategory, setSelCategory }) => {
                             className={styles.categoryList}
                             variant="outlined"
                             onClick={() => setSelCategory("all")} 
-                            sx={{"backgroundColor": selCategory==='all'?"lightBlue":""}}
+                            sx={{"backgroundColor": selCategory==='all'?"lightGreen":""}}
                         >
                             All
                         </Paper>
@@ -27,7 +27,7 @@ const Category = ({ allItems, selCategory, setSelCategory }) => {
                                     variant="outlined"
                                     key={key}
                                     onClick={() => setSelCategory(key)}
-                                    sx={{"backgroundColor": selCategory===key?"lightBlue":""}}
+                                    sx={{"backgroundColor": selCategory===key?"lightGreen":""}}
                                 >
                                     {key}
                                 </Paper>

@@ -23,3 +23,17 @@
     margin-top: 20px;
     font-size: 1.4rem;
 }
+
+.pointers {
+    margin-top: 70px;
+    width: 50%;
+    text-align: center;
+}
+
+.pointers p {
+    margin-bottom: 20px;
+}
+
+.button {
+    margin-top: 40px;
+}

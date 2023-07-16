@@ -110,7 +110,7 @@ const Form = ({setNewItem}) => {
             </Grid>
 
             <Grid item xs={12}>
-              <Button type="submit" fullWidth variant="contained">
+              <Button type="submit" fullWidth variant="contained" color="success">
                 Add Foood
               </Button>
             </Grid>

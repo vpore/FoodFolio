@@ -45,7 +45,7 @@ export default function SignIn({ globalLogin }) {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: 'green' }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -77,6 +77,7 @@ export default function SignIn({ globalLogin }) {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              color="success"
             >
               Sign In
             </Button>
