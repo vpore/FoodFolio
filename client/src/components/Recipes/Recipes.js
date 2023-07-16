@@ -10,6 +10,7 @@ import Recipe from "./Recipe/Recipe";
 
 // import { obj } from "../../dk";
 import SearchBar from "../SearchBar/SearchBar";
+import LoadingSpinner from "../../assets/LoadingSpinner";
 
 
 const Recipes = () => {
@@ -17,9 +18,10 @@ const Recipes = () => {
   const [items, setItems] = useState([]);
   const [recipes, setRecipes] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [status, setStatus] = useState(null);
 
   useEffect(() => {
-    getItems().then((data) => setItems(data));
+    getItems().then((responseObj) => setItems(responseObj.data));
   }, []);
 
   useEffect(() => {
@@ -27,7 +29,7 @@ const Recipes = () => {
     for (let x in items) {
       ingredients.push(items[x].itemName);
     }
-    getRecipes(ingredients).then((data) => setRecipes(data));
+    getRecipes(ingredients).then((responseObj) => {setRecipes(responseObj.data); setStatus(responseObj.status);});
   }, [items]);
 
 
@@ -73,19 +75,25 @@ const Recipes = () => {
       </Container> */}
 
       <Container>
-        <SearchBar setRecipes={setRecipes} setSearchQuery={setSearchQuery} />
+        <SearchBar setRecipes={setRecipes} setSearchQuery={setSearchQuery} setStatus={setStatus} />
 
         {searchQuery ? (
           <Typography variant="h5">Recipes for {searchQuery}</Typography>
         ) : (
           <Typography variant="h5">Recommended Recipes</Typography>
         )}
-
-        <Masonry theme={theme} columns={{ xs: 1, sm: 2, md: 3 }} spacing={3} sx={{mt: 3}}>
-          {recipes.map((recipe) => (
-            <Recipe key={recipe.id} recipe={recipe} />
-          ))}
-        </Masonry>
+        
+        {
+          status === null
+          ?
+          <LoadingSpinner />
+          :
+          <Masonry theme={theme} columns={{ xs: 1, sm: 2, md: 3 }} spacing={3} sx={{mt: 3}}>
+            {recipes.map((recipe) => (
+              <Recipe key={recipe.id} recipe={recipe} />
+            ))}
+          </Masonry>
+        }
       </Container>
     </>
   );

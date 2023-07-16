@@ -6,7 +6,7 @@ import { Container, InputAdornment, TextField } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { getRecipes } from "../../actions/recipe";
 
-const SearchBar = ({ setRecipes, setSearchQuery }) => {
+const SearchBar = ({ setRecipes, setSearchQuery, setStatus }) => {
     const [searchTerm, setSearchTerm] = useState("");
 
     const handleChange = (event) => {
@@ -15,7 +15,7 @@ const SearchBar = ({ setRecipes, setSearchQuery }) => {
     
     const handleClick = () => {
         setSearchQuery(searchTerm);
-        getRecipes(searchTerm).then((data) => setRecipes(data));
+        getRecipes(searchTerm).then((responseObj) => {setRecipes(responseObj.data); setStatus(responseObj.status)});
     }
     
     const handleKeyPress = (e) => {

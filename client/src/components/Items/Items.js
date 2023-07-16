@@ -7,16 +7,18 @@ import styles from './Items.module.css';
 import nothing from '../../assets/nothing.svg';
 import Category from "./Category/Category";
 import List from "./List/List";
+import LoadingSpinner from "../../assets/LoadingSpinner";
 
 
 const Items = ({ newItem, updatedItem, setUpdatedItem, delItem, setDelItem }) => {
 
     const [selCategory, setSelCategory] = useState("all");
     const [items, setItems] = useState([]);
+    const [status, setStatus] = useState(null);
     const user = JSON.parse(localStorage.getItem('profile'));
     
     useEffect(() => {
-        getItems().then(data => setItems(data));
+        getItems().then((responseObj) => {setItems(responseObj.data); setStatus(responseObj.status)});
     }, [newItem, delItem, updatedItem]);
 
     let allItems = {};
@@ -33,29 +35,35 @@ const Items = ({ newItem, updatedItem, setUpdatedItem, delItem, setDelItem }) =>
     return(
         <>
             <React.Fragment>
-                {!items.length ? 
+                {
+                    status===null
+                    ?
+                    <LoadingSpinner />              
+                    :
+                    (
+                        !items.length
+                        ?
+                        <div className={styles.nothingImg}>
+                            <p>Hey {user.data.result.name}!</p><br/><p>Try adding some items --&gt;</p><br/>
+                            <img src={nothing} height="360"/>
+                        </div>
+                        :
+                        <div className={styles.main}>
+                            <Category
+                                allItems={allItems}
+                                selCategory={selCategory}
+                                setSelCategory={setSelCategory}
+                            />
 
-                <div className={styles.nothingImg}>
-                    <p>Hey {user.data.result.name}!</p><br/><p>Try adding some items --&gt;</p><br/>
-                    <img src={nothing} height="360"/>
-                </div>                
-                :
-                <div className={styles.main}>
-                    <Category
-                        allItems={allItems}
-                        selCategory={selCategory}
-                        setSelCategory={setSelCategory}
-                    />
-
-                    <List
-                        items={items}
-                        allItems={allItems}
-                        selCategory={selCategory}
-                        setUpdatedItem={setUpdatedItem}
-                        setDelItem={setDelItem}
-                    />
-                </div>
-                
+                            <List
+                                items={items}
+                                allItems={allItems}
+                                selCategory={selCategory}
+                                setUpdatedItem={setUpdatedItem}
+                                setDelItem={setDelItem}
+                            />
+                        </div>          
+                    )
                 }
             </React.Fragment>
         </>

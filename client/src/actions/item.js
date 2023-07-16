@@ -9,8 +9,9 @@ export const createItem = async (item) => {
 
 export const getItems = async () => {
     try{
-        const {data} = await api.getItems();
-        return data;
+        const {data, status} = await api.getItems();
+        const responseObj = {data, status};
+        return responseObj;
     }
     catch(err){console.log(err);}
 }
@@ -24,8 +25,9 @@ export const updateItem = async (id, updatedItem) => {
 
 export const getExpItems = async () => {
     try{
-        const {data} = await api.getExpItems();
-        return data;
+        const {data, status} = await api.getExpItems();
+        const responseObj = {data, status};
+        return responseObj;
     }
     catch(err){console.log(err);}
 }

@@ -7,8 +7,10 @@ export const getRecipes = async (ingredients) => {
         const response = await fetch(
           `${API_DOMAIN}/recipes/findByIngredients?ingredients=${ingredients}&number=15&limitLicense=true&ranking=1&ignorePantry=false&${API_KEY}`
         );
+        const status = response.status;
         const data = await response.json();
-        return data;
+        const responseObj = {data, status};
+        return responseObj;
     }
     catch(err) {console.log(err);}
 }
@@ -18,8 +20,10 @@ export const getRecipeInfo = async (recipeid) => {
         const response = await fetch(
           `${API_DOMAIN}/recipes/${recipeid}/information?includeNutrition=false&${API_KEY}`
         );
+        const status = response.status;
         const data = await response.json();
-        return data;
+        const responseObj = {data, status};
+        return responseObj;
     }
     catch(err) {console.log(err);}
 }
