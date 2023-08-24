@@ -11,7 +11,8 @@ import Recipe from "./Recipe/Recipe";
 // import { obj } from "../../dk";
 import SearchBar from "../SearchBar/SearchBar";
 import LoadingSpinner from "../../assets/LoadingSpinner";
-
+import nothing from "../../assets/nothing.svg";
+import { Link } from "react-router-dom";
 
 const Recipes = () => {
 
@@ -80,7 +81,7 @@ const Recipes = () => {
         {searchQuery ? (
           <Typography variant="h5">Recipes for {searchQuery}</Typography>
         ) : (
-          <Typography variant="h5">Recommended Recipes</Typography>
+          <h1>Recommended Recipes</h1>
         )}
         
         {
@@ -88,11 +89,20 @@ const Recipes = () => {
           ?
           <LoadingSpinner />
           :
-          <Masonry theme={theme} columns={{ xs: 1, sm: 2, md: 3 }} spacing={3} sx={{mt: 3}}>
-            {recipes.map((recipe) => (
-              <Recipe key={recipe.id} recipe={recipe} />
-            ))}
-          </Masonry>
+          (
+            !recipes.length
+            ?
+            <div style={{marginTop:"20px", display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center"}}>
+              <p>Hey! Add some food in your <Link to="/home" style={{color:"green", fontStyle:"italic"}}>inventory</Link></p><br/>
+              <img src={nothing} height="360"/>
+            </div>
+            :
+            <Masonry theme={theme} columns={{ xs: 1, sm: 2, md: 3 }} spacing={3} sx={{mt: 3}}>
+              {recipes.map((recipe) => (
+                <Recipe key={recipe.id} recipe={recipe} />
+              ))}
+            </Masonry>
+          )
         }
       </Container>
     </>
