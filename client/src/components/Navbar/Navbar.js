@@ -3,7 +3,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 import decode from 'jwt-decode';
 
 import styles from './Navbar.module.css';
-import logo from '../../assets/logo-2.png';
+import logo from '../../assets/logo.png';
 
 const LandingPageLinks = () => (
   <>
