@@ -3,6 +3,7 @@ import cors from 'cors';
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import dotenv from 'dotenv';
+import cron from 'node-cron';
 
 import userRoutes from './routes/user.js';
 import itemRoutes from './routes/item.js';
@@ -20,15 +21,20 @@ app.use(cors());
 app.use('/user', userRoutes);
 app.use('/item', itemRoutes);
 
-const checkExpirationsDaily = async () => {
-    setTimeout(async () => {
-        await checkExpirations();
-        await checkExpirationsDaily();
-    }, oneDayTime);
-};
+cron.schedule("*/10 * * * *", () => {
+  checkExpirations();
+});
 
-checkExpirations();
-checkExpirationsDaily();
+// const checkExpirationsDaily = async () => {
+//     setTimeout(async () => {
+//         // await checkExpirations();
+//         await checkExpirationsDaily();
+//         console.log("helloo");
+//     }, 10000);
+// };
+
+// checkExpirations();
+// checkExpirationsDaily();
 
 const PORT = process.env.PORT;
 
