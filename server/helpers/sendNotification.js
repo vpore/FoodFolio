@@ -38,8 +38,8 @@ export default async (notifications) => {
   // ];
 
   let notifs = {};
-  for (const notifi in notifications){
-    let notif = notifications[notifi];
+  for (const key in notifications){
+    let notif = notifications[key];
     if(!notifs[notif.creator]) notifs[notif.creator] = new Array();
 
     const item = await Item.findById(notif.itemId);
@@ -49,20 +49,18 @@ export default async (notifications) => {
         expiryDate: item.expiryDate
       });
     }
-  }
+  }  
 
-  
-
-  for (const eachNotif in notifs) {
+  for (const key in notifs) {
     let items = "", item, date;
     
-    for (const notif in notifs[eachNotif]) {
-      item = notifs[eachNotif][notif];
+    for (const notif in notifs[key]) {
+      item = notifs[key][notif];
       date = String(item.expiryDate).substr(0, 15);
       items += `<p>${item.itemName} - ${date}</p>`;
     }
     
-    const user = await User.findById(eachNotif); // key of notif
+    const user = await User.findById(key); // key of notif
     if (user) {
       const html = `
       <p>Hi, ${user.name}</p>
@@ -80,8 +78,8 @@ export default async (notifications) => {
 
   // notifs.map(async notif => {
   //   let items = "";
-  //   notif.map(eachNotif => {
-  //     items += `${eachNotif.itemName} - ${eachNotif.expiryDate}\n`;
+  //   notif.map(key => {
+  //     items += `${key.itemName} - ${key.expiryDate}\n`;
   //   })
 
   //   const user = await User.findById(notif); // key of notif
