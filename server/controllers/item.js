@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import Item from "../models/item.js";
+import Notification from "../models/notification.js";
 import generateNotification from "../helpers/generateNotification.js";
 
 export const createItem = async (req, res) => {
@@ -44,6 +45,11 @@ export const deleteItem = async (req, res) => {
 
     if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send("No item with that id");
     await Item.findByIdAndRemove(id);
+
+    const notifications = await Notification.find({ itemId: id });
+    notifications.map(async notification => {
+        await Notification.deleteOne({_id: notification._id})
+    });
     res.json({message: 'Item Deleted!'});
 }
 
