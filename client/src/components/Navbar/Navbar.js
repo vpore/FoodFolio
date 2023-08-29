@@ -8,15 +8,6 @@ import logo from '../../assets/logo.png';
 const LandingPageLinks = () => (
   <>
     <p>
-      <a>Product</a>
-    </p>
-    <p>
-      <a>Pricing</a>
-    </p>
-    <p>
-      <a>Contact Us</a>
-    </p>
-    <p>
       <NavLink
         className={({ isActive }) => {
           return isActiveFunc(isActive);
@@ -80,15 +71,6 @@ const Navbar = ({ user, globalLogout }) => {
               >
                 Recipes
               </NavLink>
-            </p>
-            <p>
-              <a>Community</a>
-            </p>
-            <p>
-              <a>Pricing</a>
-            </p>
-            <p>
-              <a>Contact Us</a>
             </p>
             <p onClick={globalLogout}>
               <a>Logout</a>
