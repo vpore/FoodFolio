@@ -1,14 +1,14 @@
 import mongoose from "mongoose";
 import Item from "../models/item.js";
 import Notification from "../models/notification.js";
-import generateNotification from "../helpers/generateNotification.js";
+import GenerateNotification from "../helpers/GenerateNotification.js";
 
 export const createItem = async (req, res) => {
     const item = req.body;
     const newItem = new Item({...item, creator: req.userId, createdAt: new Date().toISOString()});
     try{
         await newItem.save();
-        await generateNotification(
+        await GenerateNotification(
             newItem.expiryDate,
             newItem.creator,
             newItem._id
