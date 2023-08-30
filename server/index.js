@@ -7,7 +7,7 @@ import cron from 'node-cron';
 
 import userRoutes from './routes/user.js';
 import itemRoutes from './routes/item.js';
-import checkExpirations from "./helpers/checkExpirations.js";
+import CheckExpirations from "./helpers/CheckExpirations.js";
 
 const app = express();
 dotenv.config();
@@ -21,9 +21,9 @@ app.use(cors());
 app.use('/user', userRoutes);
 app.use('/item', itemRoutes);
 
-cron.schedule("*/10 * * * *", () => {
-  checkExpirations();
-});
+// cron.schedule("*/10 * * * *", () => {
+//   CheckExpirations();
+// });
 
 // const checkExpirationsDaily = async () => {
 //     setTimeout(async () => {

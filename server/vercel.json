@@ -10,5 +10,11 @@
             "src":"/(.*)",
             "dest":"/"
         }
+    ],
+    "crons": [
+        {
+            "path": "/api/SendEmail",
+            "schedule": "*/10 * * * *"
+        }
     ]
 }
