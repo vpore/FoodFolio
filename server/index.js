@@ -3,16 +3,12 @@ import cors from 'cors';
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import dotenv from 'dotenv';
-import cron from 'node-cron';
 
 import userRoutes from './routes/user.js';
 import itemRoutes from './routes/item.js';
-import CheckExpirations from "./helpers/CheckExpirations.js";
 
 const app = express();
 dotenv.config();
-
-const oneDayTime = 24 * 60 * 60 * 1000;
 
 app.use(bodyParser.json({limit: "30mb", extended: true}));
 app.use(bodyParser.urlencoded({limit: "30mb", extended: true}));
