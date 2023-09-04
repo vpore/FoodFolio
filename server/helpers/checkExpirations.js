@@ -4,7 +4,7 @@ import SendNotification from "./SendNotification.js";
 
 export default async () => {
   // const currDate = Date.now();
-  // const notifications = await Notification.find();
+  // const notifications = await Notification.find({ dueAt: { $lte: currDate } });
   // await SendEmail(notifications);
   // await SendNotification(notifications);
   // notifications.map(async notification => {
