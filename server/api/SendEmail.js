@@ -18,6 +18,7 @@ dotenv.config();
 // send email
 
 export default async (req, res) => {
+  console.log("hello");
     const currDate = Date.now();
     const notifications = await Notification.find();
   // let notifications = [
