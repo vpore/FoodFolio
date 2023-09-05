@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import Item from "../models/item.js";
 import Notification from "../models/notification.js";
-import GenerateNotification from "../helpers/GenerateNotification.js";
+import GenerateNotification from "../helpers/generate-notification.js";
 
 export const createItem = async (req, res) => {
     const item = req.body;

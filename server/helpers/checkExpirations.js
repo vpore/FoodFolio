@@ -1,6 +1,6 @@
 import Notification from "../models/notification.js";
 import SendEmail from "../api/SendEmail.js";
-import SendNotification from "./SendNotification.js";
+// import SendNotification from "./SendNotification.js";
 
 export default async () => {
   // const currDate = Date.now();
