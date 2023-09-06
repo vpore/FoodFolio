@@ -57,7 +57,7 @@ export default async (req, res) => {
         ${items}
         `;
         const sent = await transporter.sendMail({
-          from: "focus.app123@gmail.com",
+          from: "kitchen.app@gmail.com",
           to: user.email,
           subject: "Expiration Alert",
           html,
