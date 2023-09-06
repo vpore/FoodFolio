@@ -1,9 +1,9 @@
 import express from "express";
 
-import SendEmail from "../api/SendEmail.js";
+import { email } from "../controllers/email.js";
 
 const router = express.Router();
 
-router.get('/', SendEmail);
+router.get('/', email);
 
 export default router;

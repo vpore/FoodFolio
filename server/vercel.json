@@ -14,7 +14,7 @@
     "crons": [
         {
             "path": "/sendemail",
-            "schedule": "45 12 * * *"
+            "schedule": "30 14 * * *"
         }
     ]
 }

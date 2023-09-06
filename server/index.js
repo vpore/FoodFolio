@@ -19,21 +19,6 @@ app.use('/user', userRoutes);
 app.use('/item', itemRoutes);
 app.use('/sendemail', emailRoute);
 
-// cron.schedule("*/10 * * * *", () => {
-//   CheckExpirations();
-// });
-
-// const checkExpirationsDaily = async () => {
-//     setTimeout(async () => {
-//         // await checkExpirations();
-//         await checkExpirationsDaily();
-//         console.log("helloo");
-//     }, 10000);
-// };
-
-// checkExpirations();
-// checkExpirationsDaily();
-
 const PORT = process.env.PORT;
 
 mongoose.set("strictQuery", false);
