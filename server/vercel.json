@@ -13,8 +13,8 @@
     ],
     "crons": [
         {
-            "path": "/api/SendEmail",
-            "schedule": "0 8 * * *"
+            "path": "/sendEmail",
+            "schedule": "15 8 * * *"
         }
     ]
 }

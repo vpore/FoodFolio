@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 
 import userRoutes from './routes/user.js';
 import itemRoutes from './routes/item.js';
+import emailRoute from './routes/email.js';
 
 const app = express();
 dotenv.config();
@@ -16,6 +17,7 @@ app.use(cors());
 
 app.use('/user', userRoutes);
 app.use('/item', itemRoutes);
+app.use('/sendemail', emailRoute);
 
 // cron.schedule("*/10 * * * *", () => {
 //   CheckExpirations();
