@@ -13,7 +13,7 @@
     ],
     "crons": [
         {
-            "path": "/sendEmail",
+            "path": "/sendemail",
             "schedule": "30 11 * * *"
         }
     ]
