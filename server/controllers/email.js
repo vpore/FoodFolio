@@ -21,10 +21,7 @@ export const email = async (req, res) => {
     const currDate = Date.now();
     const notifications = await Notification.find({ dueAt: { $lte: currDate } });
 
-    notifications.map(async notification => {
-        await Notification.deleteOne({ _id: notification._id })
-    });
-
+    
     let notifs = {};
     for (const key in notifications) {
       let notif = notifications[key];
@@ -65,7 +62,10 @@ export const email = async (req, res) => {
         });
       }
     }
-
+    
+    notifications.map(async notification => {
+      await Notification.deleteOne({ _id: notification._id })
+    });
     return res.status(200).json({ message: "Email sent!" });
   }
   
