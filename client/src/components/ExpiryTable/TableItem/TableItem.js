@@ -8,6 +8,7 @@ import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import { deleteItem, updateItem } from "../../../actions/item";
 
 import styles from "./TableItem.module.css";
+import { Link } from "react-router-dom";
 
 const TableItem = ({ row, setUpdatedItem, setDelItem }) => {
   const [clicked, setClicked] = useState(false);
@@ -54,7 +55,9 @@ const TableItem = ({ row, setUpdatedItem, setDelItem }) => {
                     setUpdatedItem({ id: row._id });
                   }}
                 >
-                  OK
+                  <Link to="/home">
+                    OK                  
+                  </Link>
                 </Button>
               </React.Fragment>
             )
@@ -89,14 +92,16 @@ const TableItem = ({ row, setUpdatedItem, setDelItem }) => {
 
         <TableCell align="center">
           <Tooltip title="Wanna delete?" placement="right">
-            <RemoveCircleOutlineIcon
-              className={styles.pointer}
-              fontSize="small"
-              onClick={() => {
-                deleteItem(row._id);
-                setDelItem(row._id);
-              }}
-            />
+            <Link to="/home">
+              <RemoveCircleOutlineIcon
+                className={styles.pointer}
+                fontSize="small"
+                onClick={() => {
+                  deleteItem(row._id);
+                  setDelItem(row._id);
+                }}
+              />
+            </Link>
           </Tooltip>
         </TableCell>
         

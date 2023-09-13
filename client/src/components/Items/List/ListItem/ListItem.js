@@ -3,10 +3,12 @@ import React, { useState } from "react";
 
 import { Paper, TextField, Button, Tooltip, Grid } from "@mui/material";
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
+import EditIcon from "@mui/icons-material/Edit";
 
 import { updateItem, deleteItem } from "../../../../actions/item";
 
 import styles from './ListItem.module.css';
+import { Link } from "react-router-dom";
 
 const ListItem = ({ eachItem, setUpdatedItem, setDelItem, allCategory }) => {
 
@@ -42,7 +44,9 @@ const ListItem = ({ eachItem, setUpdatedItem, setDelItem, allCategory }) => {
                         setUpdatedItem({ id: eachItem._id });
                       }}
                     >
-                      OK
+                      <Link to="/home">
+                        OK                      
+                      </Link>
                     </Button>
                   </Grid>
                 </React.Fragment>
@@ -76,14 +80,16 @@ const ListItem = ({ eachItem, setUpdatedItem, setDelItem, allCategory }) => {
 
             <Grid item>
               <Tooltip title="Wanna delete?" placement="right">
-                <RemoveCircleOutlineIcon
-                  className={styles.pointer}
-                  fontSize="small"
-                  onClick={() => {
-                    deleteItem(eachItem._id);
-                    setDelItem(eachItem._id);
-                  }}
-                />
+                <Link to="/home">
+                  <RemoveCircleOutlineIcon
+                    className={styles.pointer}
+                    fontSize="small"
+                    onClick={() => {
+                      deleteItem(eachItem._id);
+                      setDelItem(eachItem._id);
+                    }}
+                  />                
+                </Link>
               </Tooltip>
             </Grid>
             
